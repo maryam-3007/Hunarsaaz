@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art & Craft Store</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<form id="emailForm" style="display: none;">
+  <input type="text" name="name" id="emailName">
+  <input type="email" name="email" id="emailEmail">
+  <textarea name="items" id="emailItems"></textarea>
+  <input type="text" name="total" id="emailTotal">
+  <textarea name="address" id="emailAddress"></textarea>
+</form>
+<body>
+    <div class="wrapper">
+  <header>
+   <h1>ہنر ساز</h1>
+
+  </header>
+  <nav class="navbar">
+
+  <div class="side-menu" id="sideMenu">
+    <a href="#" onclick="navigateAndClose('home')">Home</a>
+    <a href="#" onclick="navigateAndClose('packages')">Packages</a>
+    <a id="ordersLink" href="#" onclick="navigateAndClose('orders')">Orders</a>
+    <a id="allOrdersLink" href="#" onclick="navigateAndClose('Allorders')" style="display: none;">All Orders</a>
+    <a id="addPackageLink" href="#" onclick="navigateAndClose('addPackage')" style="display: none;">Add Packages</a>
+    <a href="#" onclick="navigateAndClose('reviews')">Reviews</a>
+    <a href="#" onclick="navigateAndClose('about')">About</a>
+  </div>
+  <a href="#" onclick="showSection('cart')" class="cart-icon">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+</nav>
+
+<main>
+  <section id="login" class="active">
+  <h2>Admin Login</h2>
+  <form onsubmit="handleLogin(event)">
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
+</section>
+
+  <section id="home" class="active">
+  <div class="home-container">
+    <div class="home-text">
+      <p id="sloganLine" class="slogan">Hunar Ko Saaz Do-Grow With What You Love!</p>
+      <p>Welcome to HunarSaaz — where creativity meets purpose. Whether you're starting fresh or looking to elevate your online presence, we bring your vision to life through thoughtful design and branding. Explore handcrafted digital packs designed for real growth. Our work blends heart, strategy, and style to empower your hustle. Let’s build something beautiful — together.</p>
+   <div class="services-section">
+  <h3>Our Services</h3>
+  <div class="service-list">
+    <div class="service-card">
+      <h4>🛍️ Designing Logo</h4>
+      <p>We help you design perfect logos for handcrafted and curated items that match your brand's essence.</p>
+    </div>
+    <div class="service-card">
+      <h4>📦 Selling Strategy</h4>
+      <p>Showcase and sell your art, crafts, or digital products through engaging strategies.</p>
+    </div>
+    <div class="service-card">
+      <h4>📢 Marketing</h4>
+      <p>Boost your reach with custom marketing plans designed for small businesses and creators.</p>
+    </div>
+    <div class="service-card">
+      <h4>🎨 Branding Strategy</h4>
+      <p>From logos to social kits, we create branding that speaks your story and style.</p>
+    </div>
+    <div class="service-card">
+      <h4>📺 Advertisement</h4>
+      <p>Get noticed with aesthetic visuals, reels, and online promotions tailored for your audience.</p>
+    </div>
+  </div>
+</div>
+    </div>   
+  </div>
+</section>
+
+
+
+  <section id="packages">
+    <h2>Our Packages</h2>
+    <div id="packagesList" class="packages-list">
+    </div>
+
+  </section>
+
+  <section id="addPackage">
+    <h2>Add a New Package</h2>
+    <form onsubmit="addPackage(event)">
+      <input type="text" id="packageName" placeholder="Package name" required />
+      <textarea id="packageDescription" placeholder="Package description" required></textarea>
+      <input type="file" id="packageImageFile" accept="image/*" />
+      <input type="text" id="packageImageUrl" placeholder="Or enter image URL" />
+       <input type="number" id="packagePrice" placeholder="Price in PKR" required />
+      <button type="submit">Add Package</button>
+    </form>
+  </section>
+
+  <section id="cart" class="cart-section">
+  <h2>Your Cart🛒</h2>
+  <div id="cartList" class="cart-list"></div>
+  <button onclick="goToCheckout()" id="checkoutBtn" class="checkout-btn">Proceed to Checkout</button>
+</section>
+
+  <!-- Checkout Page -->
+<section id="checkout"style="display: none;">
+  <h2>Checkout</h2>
+  <form id="checkoutForm" onsubmit="placeOrder(event)">
+    <input type="text" id="customerName" placeholder="Your Name" required />
+    <input type="email" id="customerEmail" placeholder="Your Email" required />
+    <textarea id="customerAddress" placeholder="Your Address" required></textarea>
+    
+    
+    <label>
+      <input type="radio" name="payment" value="Cash" checked /> Pay with Cash
+    </label>
+    <p id="totalBill" class="total-bill">Total Bill: Rs. 0</p>
+
+    <button type="submit">Place Order</button>
+  </form>
+</section>
+<section id="orders" style="display: none;">
+  <h2>Your Orders</h2>
+  <div id="orderList"></div>
+</section>
+<section id="Allorders" style="display: none;">
+  <h2>All Orders</h2>
+  <div id="allOrderList"></div>
+</section>
+
+  <section id="reviews">
+    <h2>Customer Reviews</h2>
+    <form onsubmit="addReview(event)">
+        <input type="text" id="reviewerName" placeholder="Your name" required />
+      <textarea id="reviewInput" placeholder="Write your review here..." required></textarea>
+      <select id="ratingInput" required>
+        <option value="">Rating</option>
+        <option value="1">⭐</option>
+        <option value="2">⭐⭐</option>
+        <option value="3">⭐⭐⭐</option>
+        <option value="4">⭐⭐⭐⭐</option>
+        <option value="5">⭐⭐⭐⭐⭐</option>
+      </select>
+      <button type="submit">Submit Review</button>
+    </form>
+  </section>
+  <div id="reviewList" class="review-list-outside"></div>
+  <section id="about">
+  <h2>About Us</h2>
+  <p>
+    At <strong>Hunarsaaz</strong>, we believe that every skill deserves the spotlight.
+    Whether you’re a passionate home baker, an artist launching your social page, or a small business owner ready to grow — we’re here to give your “Hunar” (talent) the “Saaz” (strategy & design) it needs to shine.
+  </p>
+  <p>
+    We’re a creative team committed to empowering local entrepreneurs, freelancers, and dreamers with meaningful branding solutions. From logos to social kits, every design we craft is made with care, creativity, and your growth in mind.
+  </p>
+  <p>
+    Our mission is simple: Make branding easy, accessible, and beautiful for everyone starting from scratch.
+    With ready-to-go digital packs, personalized design, and support that feels like a creative partner on your side — HunarSaaz helps you grow with what you love.
+  </p>
+
+  <h3>Meet the Team</h3>
+  <div class="team-wrapper">
+  <div class="team-card">
+    <strong>Umama Sehar</strong>
+    <p>Social Media & Outreach</p>
+  </div>
+  <div class="team-card">
+    <strong>Syeda Bonita</strong>
+    <p>Content & Communication</p>
+  </div>
+  <div class="team-card">
+    <strong>Syeda Rubab Naqvi</strong>
+    <p>Strategy & Planning</p>
+  </div>
+  <div class="team-card">
+    <strong>Faiqa Fareed</strong>
+    <p>Operations & Coordination</p>
+  </div>
+  <div class="team-card">
+    <strong>Maryam Ilyas</strong>
+    <p>Website Development</p>
+  </div>
+</div>
+
+<section id="adminPanel" style="display: none;">
+  <h2>Admin Dashboard</h2>
+<p class="admin-description">
+  Welcome to the admin panel. Here you can add new products by providing a name, description, and an image file or URL. 
+  Make sure to review everything before submitting.
+</p>
+<form id="addPackageForm" onsubmit="addPackage(event)">
+    <input type="text" id="packageName" placeholder="Package name" required />
+    <textarea id="packageDescription" placeholder="Package description" required></textarea>
+    <input type="file" id="packageImageFile" accept="image/*" />
+    <input type="text" id="packageImageUrl" placeholder="Or enter image URL" />
+    <button type="submit">Add Package</button>
+  </form>
+
+</section>
+  </main>
+
+  <footer>
+    &copy; © 2025 HunarSaaz. All rights reserved.
+  </footer>
+  <div class="faq-note">
+This website and its content are the property of HunarSaaz and may not be reproduced, distributed, or transmitted in any form without prior written permission. All trademarks, service marks, and logos displayed are registered and/or unregistered marks of their respective owners. 
+Unauthorized use of any material is strictly prohibited and may violate applicable laws. 
+<br>
+<br>
+  💬 For FAQs, Contact via gmail.
+  <br>
+  hunarsaaz1@gmail.com
+</div>
+
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDRqo_4lci7iKAghK_85pRK-thP8Ob253w",
+    authDomain: "hunarsaaz-d9ea6.firebaseapp.com",
+    databaseURL: "https://hunarsaaz-d9ea6-default-rtdb.firebaseio.com",
+    projectId: "hunarsaaz-d9ea6",
+    storageBucket: "hunarsaaz-d9ea6.appspot.com",
+    messagingSenderId: "1086080055182",
+    appId: "1:1086080055182:web:2fd09a868bc699c3e396df"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  window.db = db;
+</script>
+
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  emailjs.init("jxKlRzPnuSXNLBbB5");
+</script>
+<script src="script.js"></script>
+</body>
+
+</html>

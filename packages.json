@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Growth Booster",
+    "description": "Kickstart Your Brand. Includes 3 social media posts, logo design, and a brand consultation.",
+    "price": 11000,
+    "image": "images/package1.png"
+  },
+  {
+    "name": "Starter Spark",
+    "description": "Grow with Strategy. Includes 5 posts, brand elements, customer targeting, and Instagram Live access.",
+    "price": 15000,
+    "image": "images/package3.jpeg"
+  },
+  {
+    "name": "Digital Domination",
+    "description": "Strategic Boost for Growth. Includes 8 posts, full branding kit, audience profiling, and packaging design.",
+    "price": 21000,
+    "image": "images/package4.jpeg"
+  },
+  {
+    "name": "Elite Enterprise",
+    "description": "Full Brand Makeover. Includes 12+ posts, complete branding, continuous promotion, and strategy sessions.",
+    "price": 31000,
+    "image": "images/package 5.jpeg"
+  }
+]
